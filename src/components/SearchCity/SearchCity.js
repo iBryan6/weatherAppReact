@@ -4,21 +4,17 @@ import axios from "axios";
 
 export class SearchCity extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      city: "",
-      temperature: 0,
-      humity: 0
-    };
-    this.getWeather = this.getWeather.bind(this);
+  state = {
+    city: "",
+    temperature: 0,
+    humity: 0
   }
 
   textHandler = e => {
     this.setState({ city: e.target.value });
   }
 
-  getWeather() {
+  getWeather = () => {
     let city = this.state.city
     return axios
       .get(
@@ -31,19 +27,18 @@ export class SearchCity extends Component {
           humity: res.data.main.humidity
         });
       });
-
   }
 
   render() {
     return (
-      <Form>
+      <Form onSubmit={this.getWeather}>
         <Form.Input
           label="LOOK FOR YOUR CITY'S WEATHER HERE:"
           type="text"
           placeholder="Find your city..."
           onChange={this.textHandler}
         />
-        <Button onClick={this.getWeather}>Submit</Button>
+        <Button type="submit">Submit</Button>
       </Form>
     );
   }
