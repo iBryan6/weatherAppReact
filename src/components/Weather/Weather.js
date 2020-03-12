@@ -1,41 +1,44 @@
 import React from "react";
-import { Segment, Button, Icon, Header } from "semantic-ui-react";
+import { Segment, Button, Icon, Header, Popup } from "semantic-ui-react";
 
 const Weather = props => (
   <div>
-    {props.temperature && props.humidity && props.info === "all" && (
+    {props.temperature && props.humidity && (
       <Segment style={{ marginTop: "40px" }}>
         <Header sub>WEATHER RESULTS:</Header>
         <br />
-        <p>Temperature: {props.temperature}</p>
-        <p>Humidity: {props.humidity}</p>
-        <Button icon labelPosition="left" color="yellow">
-          <Icon name="star" />
-          Set as favorite
-        </Button>
-      </Segment>
-    )}
+        
+        {/* SHOW ALL */}
+        {props.temperature && props.humidity && props.info === "all" && (
+          <div>
+            <p>
+              <Icon name="cloud" size="large" /> Temperature: {props.fahrenheit}
+            </p>
+            <p>
+              <Icon name="shower" size="large" /> Humidity: {props.humidity}
+            </p>
+          </div>
+        )}
 
-    {props.temperature && props.humidity && props.info === "temp" && (
-      <Segment style={{ marginTop: "40px" }}>
-        <Header sub>WEATHER RESULTS:</Header>
-        <br />
-        <p>Temperature: {props.temperature}</p>
-        <Button icon labelPosition="left" color="yellow">
-          <Icon name="star" />
-          Set as favorite
-        </Button>
-      </Segment>
-    )}
-    {props.temperature && props.humidity && props.info === "hum" && (
-      <Segment style={{ marginTop: "40px" }}>
-        <Header sub>WEATHER RESULTS:</Header>
-        <br />
-        <p>Humidity: {props.humidity}</p>
-        <Button icon labelPosition="left" color="yellow">
-          <Icon name="star" />
-          Set as favorite
-        </Button>
+        {/* SHOW JUST TEMP*/}
+        {props.temperature && props.humidity && props.info === "temp" && (
+          <div>
+            <p>
+              <Icon name="cloud" size="large" /> Temperature: {props.fahrenheit}
+            </p>
+          </div>
+        )}
+
+        {/* SHOW JUST HUM*/}
+        {props.temperature && props.humidity && props.info === "hum" && (
+          <div>
+            <p>
+              <Icon name="shower" size="large" /> Humidity: {props.humidity}
+            </p>
+          </div>
+        )}
+
+        <Popup content='Add this city to your favorites' trigger={<Button icon='star' color="yellow" style={{ marginTop: "20px" }}/>} />
       </Segment>
     )}
   </div>

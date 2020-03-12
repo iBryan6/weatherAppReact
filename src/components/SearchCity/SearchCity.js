@@ -15,7 +15,7 @@ const SearchCity = props => (
         name="radioGroup"
         value="all"
         checked={props.info === "all"}
-        onChange={props.handleChange}
+        onChange={props.infoHandler}
       />
     </Form.Field>
     <Form.Field>
@@ -24,7 +24,7 @@ const SearchCity = props => (
         name="radioGroup"
         value="temp"
         checked={props.info === "temp"}
-        onChange={props.handleChange}
+        onChange={props.infoHandler}
       />
     </Form.Field>
     <Form.Field>
@@ -33,7 +33,7 @@ const SearchCity = props => (
         name="radioGroup"
         value="hum"
         checked={props.info === "hum"}
-        onChange={props.handleChange}
+        onChange={props.infoHandler}
       />
     </Form.Field>
     <Button type="submit" positive>
