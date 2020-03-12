@@ -1,7 +1,12 @@
 import React from "react";
+import { Header, Container } from "semantic-ui-react";
 
 const PageFavorites = props => {
-  return <h1>FAVORITES HERE</h1>;
+  return (
+    <Container>
+      <Header as="h1" content="FAVORITES" textAlign="center" />
+    </Container>
+  );
 };
 
 export default PageFavorites;
