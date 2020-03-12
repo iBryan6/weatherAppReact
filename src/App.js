@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Grid } from "semantic-ui-react";
+import { Header, Segment } from "semantic-ui-react";
 import SearchCity from "./components/SearchCity/SearchCity";
 import Weather from "./components/Weather/Weather";
 import axios from "axios";
@@ -17,7 +17,7 @@ export class App extends Component {
   };
   getWeather = () => {
     let city = this.state.city;
-    return axios
+    axios
       .get(
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${REACT_APP_WEATHER_API_KEY}`
       )
@@ -26,24 +26,25 @@ export class App extends Component {
           temperature: res.data.main.temp,
           humidity: `${res.data.main.humidity}%`
         });
+      })
+      .catch(err => {
+        alert("Please enter a valid city");
       });
   };
   render() {
     return (
-      <Grid container>
-        <Grid.Column>
-          <Header as="h1" content="OKTANA WEATHER APP" textAlign="center" />
-          <SearchCity
-            getWeather={this.getWeather}
-            textHandler={this.textHandler}
-          />
-          <Weather
-            city={this.state.city}
-            temperature={this.state.temperature}
-            humidity={this.state.humidity}
-          />
-        </Grid.Column>
-      </Grid>
+      <Segment>
+        <Header as="h1" content="OKTANA WEATHER APP" textAlign="center" />
+        <SearchCity
+          getWeather={this.getWeather}
+          textHandler={this.textHandler}
+        />
+        <Weather
+          city={this.state.city}
+          temperature={this.state.temperature}
+          humidity={this.state.humidity}
+        />
+      </Segment>
     );
   }
 }

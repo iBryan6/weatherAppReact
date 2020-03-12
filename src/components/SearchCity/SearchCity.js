@@ -13,7 +13,7 @@ export class SearchCity extends Component {
           placeholder="Find your city..."
           onChange={this.props.textHandler}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit" positive>Search</Button>
       </Form>
     );
   }
