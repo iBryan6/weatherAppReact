@@ -5,8 +5,8 @@ export class Weather extends Component {
   render() {
     return (
       <Segment>
-        <p>Temperature: Celcius o Feranhait</p>
-        <p>Humidity: </p>
+        <p>Temperature: {this.props.temperature}</p>
+        <p>Humidity: {this.props.humidity}</p>
         <Button>Save to Favorites</Button>
       </Segment>
     );
