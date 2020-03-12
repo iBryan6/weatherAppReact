@@ -22,7 +22,7 @@ const Weather = props => {
           {props.tempKelvin && props.humidity && props.info === "all" && (
             <div>
               <div style={{ marginBottom: "20px" }}>
-                °C <Checkbox slider onChange={props.tempHandler} /> °F
+                °C <Checkbox slider checked={props.tempBool} onChange={props.tempHandler} /> °F
               </div>
               <p>
                 <Icon name="cloud" size="large" /> Temperature:{temp}
@@ -37,7 +37,7 @@ const Weather = props => {
           {props.tempKelvin && props.humidity && props.info === "temp" && (
             <div>
               <div style={{ marginBottom: "20px" }}>
-                °C <Checkbox slider onChange={props.tempHandler} /> °F
+                °C <Checkbox slider checked={props.tempBool} onChange={props.tempHandler} /> °F
               </div>
               <p>
                 <Icon name="cloud" size="large" /> Temperature:{temp}
