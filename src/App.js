@@ -9,12 +9,16 @@ export class App extends Component {
   state = {
     city: "",
     temperature: undefined,
-    humidity: undefined
+    humidity: undefined,
+    Information: "all"
   };
+
+  handleChange = (e, { value }) => this.setState({ Information: value });
 
   textHandler = e => {
     this.setState({ city: e.target.value });
   };
+
   getWeather = () => {
     let city = this.state.city;
     axios
@@ -22,6 +26,7 @@ export class App extends Component {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${REACT_APP_WEATHER_API_KEY}`
       )
       .then(res => {
+        console.log(res.data.main);
         this.setState({
           temperature: res.data.main.temp,
           humidity: `${res.data.main.humidity}%`
@@ -38,11 +43,14 @@ export class App extends Component {
         <SearchCity
           getWeather={this.getWeather}
           textHandler={this.textHandler}
+          handleChange={this.handleChange}
+          info ={this.state.Information}
         />
         <Weather
           city={this.state.city}
           temperature={this.state.temperature}
           humidity={this.state.humidity}
+          info ={this.state.Information}
         />
       </Segment>
     );
