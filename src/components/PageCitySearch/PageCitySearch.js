@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component} from "react";
 import { Header, Container } from "semantic-ui-react";
 import SearchCity from "./SearchCity/SearchCity";
 import Weather from "./Weather/Weather";

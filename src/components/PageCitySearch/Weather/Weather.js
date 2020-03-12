@@ -7,6 +7,8 @@ import {
   Popup,
   Checkbox
 } from "semantic-ui-react";
+import addFavorite from "../../../store/actions/favoriteAction"
+import { connect } from "react-redux";
 
 const Weather = props => {
   let temp = "";
@@ -61,6 +63,7 @@ const Weather = props => {
                 icon="star"
                 color="yellow"
                 style={{ marginTop: "20px" }}
+                onClick={()=>{addFavorite(props.city)}}
               />
             }
           />
@@ -70,4 +73,4 @@ const Weather = props => {
   );
 };
 
-export default Weather;
+export default connect(null, {addFavorite})(Weather);
