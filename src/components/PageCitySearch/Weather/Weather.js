@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   Segment,
   Button,
@@ -7,89 +7,111 @@ import {
   Popup,
   Checkbox
 } from "semantic-ui-react";
-import addFavorite from "../../../redux/actions/favActions";
 import { connect } from "react-redux";
 
-const Weather = props => {
-  let temp = "";
-  let weatherObj = {
-    city: props.city,
-    tempCel: props.celsius,
-    tempFah: props.fahrenheit
+class Weather extends Component {
+  handleClick = city => {
+    this.props.addCity(city);
   };
-  props.tempBool === true ? (temp = props.fahrenheit) : (temp = props.celsius);
-  return (
-    <div>
-      {props.tempKelvin && props.humidity && (
-        <Segment style={{ marginTop: "40px" }}>
-          <Header sub>WEATHER RESULTS:</Header>
-          <br />
 
-          {/* SHOW ALL */}
-          {props.tempKelvin && props.humidity && props.info === "all" && (
-            <div>
-              <div style={{ marginBottom: "20px" }}>
-                °C{" "}
-                <Checkbox
-                  slider
-                  checked={props.tempBool}
-                  onChange={props.tempHandler}
-                />{" "}
-                °F
-              </div>
-              <p>
-                <Icon name="cloud" size="large" /> Temperature:{temp}
-              </p>
-              <p>
-                <Icon name="shower" size="large" /> Humidity: {props.humidity}
-              </p>
-            </div>
-          )}
+  render() {
+    let temp = "";
+    let weatherObj = {
+      city: this.props.city,
+      tempC: this.props.celsius,
+      tempF: this.props.fahrenheit,
+      hum: this.props.humidity
+    };
+    this.props.tempBool === true
+      ? (temp = this.props.fahrenheit)
+      : (temp = this.props.celsius);
+    return (
+      <div>
+        {this.props.tempKelvin && this.props.humidity && (
+          <Segment style={{ marginTop: "40px" }}>
+            <Header sub>WEATHER RESULTS:</Header>
+            <br />
 
-          {/* SHOW JUST TEMP*/}
-          {props.tempKelvin && props.humidity && props.info === "temp" && (
-            <div>
-              <div style={{ marginBottom: "20px" }}>
-                °C{" "}
-                <Checkbox
-                  slider
-                  checked={props.tempBool}
-                  onChange={props.tempHandler}
-                />{" "}
-                °F
-              </div>
-              <p>
-                <Icon name="cloud" size="large" /> Temperature:{temp}
-              </p>
-            </div>
-          )}
+            {/* SHOW ALL */}
+            {this.props.tempKelvin &&
+              this.props.humidity &&
+              this.props.info === "all" && (
+                <div>
+                  <div style={{ marginBottom: "20px" }}>
+                    °C{" "}
+                    <Checkbox
+                      slider
+                      checked={this.props.tempBool}
+                      onChange={this.props.tempHandler}
+                    />{" "}
+                    °F
+                  </div>
+                  <p>
+                    <Icon name="cloud" size="large" /> Temperature:{temp}
+                  </p>
+                  <p>
+                    <Icon name="shower" size="large" /> Humidity:{" "}
+                    {this.props.humidity}
+                  </p>
+                </div>
+              )}
 
-          {/* SHOW JUST HUM*/}
-          {props.tempKelvin && props.humidity && props.info === "hum" && (
-            <div>
-              <p>
-                <Icon name="shower" size="large" /> Humidity: {props.humidity}
-              </p>
-            </div>
-          )}
+            {/* SHOW JUST TEMP*/}
+            {this.props.tempKelvin &&
+              this.props.humidity &&
+              this.props.info === "temp" && (
+                <div>
+                  <div style={{ marginBottom: "20px" }}>
+                    °C{" "}
+                    <Checkbox
+                      slider
+                      checked={this.props.tempBool}
+                      onChange={this.props.tempHandler}
+                    />{" "}
+                    °F
+                  </div>
+                  <p>
+                    <Icon name="cloud" size="large" /> Temperature:{temp}
+                  </p>
+                </div>
+              )}
 
-          <Popup
-            content="Add this city to your favorites"
-            trigger={
-              <Button
-                icon="star"
-                color="yellow"
-                style={{ marginTop: "20px" }}
-                onClick={() => {
-                  addFavorite(weatherObj);
-                }}
-              />
-            }
-          />
-        </Segment>
-      )}
-    </div>
-  );
+            {/* SHOW JUST HUM*/}
+            {this.props.tempKelvin &&
+              this.props.humidity &&
+              this.props.info === "hum" && (
+                <div>
+                  <p>
+                    <Icon name="shower" size="large" /> Humidity:{" "}
+                    {this.props.humidity}
+                  </p>
+                </div>
+              )}
+
+            <Popup
+              content="Add this city to your favorites"
+              trigger={
+                <Button
+                  icon="star"
+                  color="yellow"
+                  style={{ marginTop: "20px" }}
+                  onClick={() => this.handleClick(weatherObj)}
+                />
+              }
+            />
+          </Segment>
+        )}
+      </div>
+    );
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addCity: city => {
+      dispatch({ type: "ADD_FAVORITE", city: city });
+    }
+  };
 };
 
-export default connect(null, { addFavorite })(Weather);
+export default connect(null, mapDispatchToProps)(Weather);

@@ -1,11 +1,10 @@
-import React, { Component} from "react";
+import React, { Component } from "react";
 import { Header, Container } from "semantic-ui-react";
 import SearchCity from "./SearchCity/SearchCity";
 import Weather from "./Weather/Weather";
 import axios from "axios";
 
 export class PageCitySearch extends Component {
-
   state = {
     city: "",
     tempKelvin: undefined,

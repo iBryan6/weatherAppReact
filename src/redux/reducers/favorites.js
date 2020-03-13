@@ -1,17 +1,12 @@
-const defaultState = [
-  { id: 1, city: "Cochabamba", tempC: "90C", tempF: "40F", hum: "40%" },
-  { id: 2, city: "La Paz", tempC: "100C", tempF: "50F", hum: "50%" },
-];
+const initialState = { favList: [] };
 
-const favorites = (state = defaultState, action) => {
+const favorites = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_FAVORITE":
-      return [
+      return {
         ...state,
-        {
-          city: "test"
-        }
-      ];
+        favList: [...state.favList, action.city ]
+      };
     default:
       return state;
   }

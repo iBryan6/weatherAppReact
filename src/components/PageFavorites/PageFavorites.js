@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Header, Container, List, Segment, Popup, Button } from "semantic-ui-react";
+import { Header, Container, List, Segment } from "semantic-ui-react";
 import { connect } from "react-redux";
 
 class PageFavorites extends Component {
   render() {
     const { favorites } = this.props;
-
+    console.log(favorites);
     return (
       <Container>
         <Header as="h1" content="FAVORITES" textAlign="center" />
@@ -30,20 +30,6 @@ class PageFavorites extends Component {
                   <List.Icon name="shower" />
                   <List.Content>{fav.hum}</List.Content>
                 </List.Item>
-                <List.Item>
-                  <Popup
-                    content="Remove from favorites"
-                    trigger={
-                      <Button
-                        icon="trash"
-                        color="red"
-                        size="tiny"
-                        style={{ marginTop: "10px" }}
-                        onClick={() => {}}
-                      />
-                    }
-                  />
-                </List.Item>
               </List>
             </Segment>
           );
@@ -54,7 +40,7 @@ class PageFavorites extends Component {
 }
 const mapStateToProps = state => {
   return {
-    favorites: state.favorites
+    favorites: state.favorites.favList
   };
 };
 
