@@ -39,7 +39,6 @@ export class PageCitySearch extends Component {
         `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${this.props.weatherApiKey}`
       )
       .then(res => {
-        console.log(res.data.main);
         let newCelsius = `${(Math.round(res.data.main.temp - 273.15) * 100) /
           100} °C`;
         let newFahrenheit = `${(Math.round(

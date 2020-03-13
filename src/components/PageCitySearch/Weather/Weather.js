@@ -7,11 +7,16 @@ import {
   Popup,
   Checkbox
 } from "semantic-ui-react";
-import addFavorite from "../../../store/actions/favoriteAction"
+import addFavorite from "../../../redux/actions/favActions";
 import { connect } from "react-redux";
 
 const Weather = props => {
   let temp = "";
+  let weatherObj = {
+    city: props.city,
+    tempCel: props.celsius,
+    tempFah: props.fahrenheit
+  };
   props.tempBool === true ? (temp = props.fahrenheit) : (temp = props.celsius);
   return (
     <div>
@@ -24,7 +29,13 @@ const Weather = props => {
           {props.tempKelvin && props.humidity && props.info === "all" && (
             <div>
               <div style={{ marginBottom: "20px" }}>
-                °C <Checkbox slider checked={props.tempBool} onChange={props.tempHandler} /> °F
+                °C{" "}
+                <Checkbox
+                  slider
+                  checked={props.tempBool}
+                  onChange={props.tempHandler}
+                />{" "}
+                °F
               </div>
               <p>
                 <Icon name="cloud" size="large" /> Temperature:{temp}
@@ -39,7 +50,13 @@ const Weather = props => {
           {props.tempKelvin && props.humidity && props.info === "temp" && (
             <div>
               <div style={{ marginBottom: "20px" }}>
-                °C <Checkbox slider checked={props.tempBool} onChange={props.tempHandler} /> °F
+                °C{" "}
+                <Checkbox
+                  slider
+                  checked={props.tempBool}
+                  onChange={props.tempHandler}
+                />{" "}
+                °F
               </div>
               <p>
                 <Icon name="cloud" size="large" /> Temperature:{temp}
@@ -63,7 +80,9 @@ const Weather = props => {
                 icon="star"
                 color="yellow"
                 style={{ marginTop: "20px" }}
-                onClick={()=>{addFavorite(props.city)}}
+                onClick={() => {
+                  addFavorite(weatherObj);
+                }}
               />
             }
           />
@@ -73,4 +92,4 @@ const Weather = props => {
   );
 };
 
-export default connect(null, {addFavorite})(Weather);
+export default connect(null, { addFavorite })(Weather);

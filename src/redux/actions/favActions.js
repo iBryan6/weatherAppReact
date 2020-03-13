@@ -1,5 +1,5 @@
 const addFavorite = city => {
-    console.log(city);
+  console.log(city);
   return {
     type: "ADD_FAVORITE",
     payload: city
