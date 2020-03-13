@@ -5,13 +5,12 @@ import { connect } from "react-redux";
 class PageFavorites extends Component {
   render() {
     const { favorites } = this.props;
-    console.log(favorites);
     return (
       <Container>
         <Header as="h1" content="FAVORITES" textAlign="center" />
-        {favorites.map(fav => {
+        {favorites.map((fav,index) => {
           return (
-            <Segment key={fav.id}>
+            <Segment key={index}>
               <List>
                 <List.Item>
                   <Header sub content="WEATHER" />
